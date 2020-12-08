@@ -3,6 +3,7 @@ from discord.ext import commands
 from core.classes import Cog_Extension
 import json
 import datetime
+import random
 
 with open('setting.json','r',encoding='utf8') as jfile:
     jdata =json.load(jfile)
@@ -38,6 +39,23 @@ class Main(Cog_Extension):
     @commands.command()
     async def clean(self, ctx, num:int):
         await ctx.channel.purge(limit=num+1)
+
+    #@commands.command()
+    #async def rand_squad(self, ctx):
+    #    online = []
+    #    for member in ctx.guild.members:
+    #        if member.raw_status == 'online' and member.bot == False:
+    #            online.append(member.name)
+    #    random_online = random.sample(online,k=2)
+
+    #    for cho1 in range(4)
+    #        team = random.sample(random_online,k=1)
+    #        await ctx.send(f"{cho1+1}小隊:" + str(team))
+    #        for name in team:
+    #        random_online.remove(name)
+    #    for i in random_offline:
+    #        print(i)
+
 
 def setup(bot):
     bot.add_cog(Main(bot))
