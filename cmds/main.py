@@ -56,6 +56,44 @@ class Main(Cog_Extension):
     #    for i in random_offline:
     #        print(i)
 
+    @commands.group()
+    async def codetest(self, ctx):
+        #await ctx.send("Group")
+        pass
+
+    @codetest.command()
+    async def python(self, ctx):
+        await ctx.send("Python")
+
+    @codetest.command()
+    async def javascript(self, ctx):
+        await ctx.send("Javascript")
+
+    @codetest.command()
+    async def cpp(self, ctx):
+        await ctx.send("C++")
+
+    @commands.command()
+    async def cmdA(self, ctx,num:float):
+        await ctx.send(num)
+    
+    @commands.command()
+    async def cmdB(self, ctx,num):
+        await ctx.send(num)
+
+    #指令個別專用的錯誤處理
+    @cmdB.error
+    async def cmdB_error(self, ctx,error):
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            await ctx.send("請輸入參數")
+
+    @commands.command()
+    async def cmdC(self, ctx,num:str):
+        try:
+            await ctx.sens(int(num))
+        except Exception as e:
+            await ctx.send(e)
+
 
 def setup(bot):
     bot.add_cog(Main(bot))

@@ -5,11 +5,13 @@ import json
 import random
 import os
 
+intents = discord.Intents.all()
+
 with open('setting.json','r',encoding='utf8') as jfile:
     jdata =json.load(jfile)
 
 #建置實體(特殊命令字首)
-bot = commands.Bot(command_prefix='[')
+bot = commands.Bot(command_prefix='[',intents = intents)
 
 #裝飾器(@bot:bot底下的.定義)
 @bot.event

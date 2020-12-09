@@ -27,5 +27,22 @@ class Event(Cog_Extension):
         if msg.content in keyword and msg.author != self.bot.user:
             await msg.channel.send('生物')
 
+    # 處理"指令"發生的錯誤 Error Handler
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx,error):
+        #await ctx.send(ctx.command)
+        if hasattr(ctx.command, 'on_error'):
+            return
+        #上文:...指令觸發了___錯誤server channel msg
+        #await ctx.send(error)
+        if isinstance(error, commands.errors.MissingRequiredArgument):
+            await ctx.send("遺失參數")
+        elif isinstance(error, commands.errors.CommandNotFound):
+            await ctx.send("沒這個指令啦!")
+        else:
+            await ctx.send("發生錯誤")
+
+
+
 def setup(bot):
     bot.add_cog(Event(bot))
